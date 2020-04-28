@@ -1,24 +1,7 @@
 # judyvue
 
-## Project setup
-```
-npm install
-```
+##### A markdown notebook to read notes in markdown and convert them to text
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+##### Built with vueJS
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+##### Developed by Judith Oiku
