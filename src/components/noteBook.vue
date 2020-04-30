@@ -2,7 +2,10 @@
     <div id="notebook">
         <!-- sidebar -->
         <aside class="sidebar">
-            <button @click="addNote">Add Note</button>
+            <button @click="addNote" :title="addNoteTitle">Add Note</button>
+            <div class="notes" v-for="(note, index) in notes" :key="index">
+                {{note.title}}
+            </div>
         </aside>
         <!-- main pane -->
         <section class="main">
@@ -23,7 +26,30 @@ import marked from "marked"
         data (){
             return{
                 content: localStorage.getItem('content') || 'You can write in **markdown**',
-                notes: [],
+                notes: [
+                    {
+                        id: 1,
+                        title: 'vue in action',
+                        content: 'This is a **very** interesting _course_',
+                        created: '30th, April',
+                        favorite: false
+                    },
+                    {
+                        id: 2,
+                        title: 'vuex state management',
+                        content: 'This is a **very** interesting _course_',
+                        created: '30th, April',
+                        favorite: false
+                    },
+                    {
+                        id: 3,
+                        title: 'vue router',
+                        content: 'This is a **very** interesting _course_',
+                        created: '30th, April',
+                        favorite: false
+                    },
+
+                ],
             }
         },
         // created () {
@@ -32,6 +58,9 @@ import marked from "marked"
         computed: {
             notePreview (){
                 return marked(this.content)
+            },
+            addNoteTitle() {
+                return this.notes.length + 'note (s) already'
             }
         },
         methods: {
@@ -46,14 +75,14 @@ import marked from "marked"
             addNote(){
                 const time = Date.now()
                 const note = {
-                    id: String(time),
+                    id: String,
                     title: 'New note' + (this.notes.length + 1),
                     content: '**Hi** !',
                     created: time,
                     favorite: false,
                 }
                 // Add to the list
-                this.note.push(note)
+                this.notes.push(note)
             }
         },
         watch: {
@@ -85,6 +114,12 @@ import marked from "marked"
     textarea{
         width: 100%;
         height: 100%;
+    }
+    button{
+        margin-bottom:20px;
+    }
+    .notes {
+        margin-top: 10px;
     }
 
 </style>
