@@ -1,0 +1,13 @@
+#notebook {
+    display: flex;
+    height: 100vh;
+}
+.main{
+    width: 60%;
+}
+
+.preview{
+    width:40%;
+    background: #f2f2f2;
+
+}
