@@ -19,6 +19,8 @@
             <div  class="toolbar">
                 <!-- rename toolbar -->
                <input type="text" v-model="selectedNote.title" placeholder="new note title"> 
+               <!-- delete note -->
+               <button @click="removeNote">delete</button>
             </div>
             <textarea v-model="selectedNote.content"></textarea>
         </section>
@@ -107,6 +109,15 @@ import marked from "marked"
                 //stringify to JSON before storing
                 localStorage.setItem('notes', JSON.stringify(this.notes))
                 console.log('Notes saved!', new Date())
+            },
+            removeNote (){
+                if (this.selectedNote && confirm('Delete the note?')) {
+                    //remove note
+                    const index = this.notes.indexOf(this.selectedNote)
+                    if (index !== -1) {
+                        this.notes.splice(index, 1)
+                    }
+                }
             }
         }, 
         watch: {
