@@ -16,6 +16,10 @@
         </aside>
         <!-- main pane -->
         <section class="main" v-if="selectedNote">
+            <div  class="toolbar">
+                <!-- rename toolbar -->
+               <input type="text" v-model="selectedNote.title" placeholder="new note title"> 
+            </div>
             <textarea v-model="selectedNote.content"></textarea>
         </section>
         <!-- preview pane -->
