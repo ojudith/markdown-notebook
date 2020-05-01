@@ -62,7 +62,7 @@ import marked from "marked"
                     },
 
                 ],
-                selectedId: null,
+                selectedId: localStorage.getItem('selected-id') || null,
             }
         },
         // created () {
@@ -110,7 +110,9 @@ import marked from "marked"
                handler:'saveNotes',
                deep: true,
            },
-           
+           selectedId (val) {
+               localStorage.setItem('selected-id', val)
+           }
            
         },
     }
