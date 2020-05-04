@@ -3,7 +3,7 @@
     <md-app md-waterfall md-mode="reveal">
       <md-app-toolbar class="md-primary">
            <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
-          <md-icon>menu</md-icon>
+          <md-icon><MenuIcon/></md-icon>
         </md-button>
         <span class="md-title">Junik Markdown NoteBook</span>
       </md-app-toolbar>
@@ -39,18 +39,28 @@
         <section class="main" v-if="selectedNote">
             <div  class="toolbar">
                 <!-- rename toolbar -->
-               <input type="text" v-model="selectedNote.title" placeholder="new note title"> 
+                 <md-field>
+                    <label>Rename note</label>
+                    <md-input v-model="selectedNote.title"></md-input>
+                </md-field>
+               <!-- <input type="text" v-model="selectedNote.title" placeholder="new note title">  -->
                <!-- favorite icon -->
-               <button @click="favoriteNote" title="Favorite note">
-                   <span v-if="selectedNote.favorite">
-                   <StarIcon/></span>
+               <button @click="favoriteNote" title="Favorite note"
+                 class="oneBtn">
+                   <span v-if="selectedNote.favorite"><md-icon>
+                   <StarIcon/></md-icon></span>
 
-               <span v-if="!selectedNote.favorite"><StarHalfIcon/></span></button>
+               <span v-if="!selectedNote.favorite"><md-icon><StarHalfIcon/></md-icon></span></button>
                    <!-- {{selectedNote.favorite ? <StarIcon/> :'&'}} -->
                <!-- delete note -->
-               <button @click="removeNote"><DeleteIcon/></button>
+               
+               <button @click="removeNote"  class="twoBtn"><md-icon><DeleteIcon/></md-icon></button>
             </div>
-            <textarea v-model="selectedNote.content"></textarea>
+            <md-field>
+                <label>write note in markdown</label>
+                    <md-textarea v-model="selectedNote.content"></md-textarea>
+            </md-field>
+            <!-- <textarea v-model="selectedNote.content"></textarea> -->
             <!-- footer of panel -->
             <div class="toolbar status-bar">
                 <span class="date">
@@ -79,6 +89,7 @@ import MarkerIcon from "vue-material-design-icons/Marker.vue"
 import DeleteIcon from "vue-material-design-icons/DeleteOutline.vue"
 import StarIcon from "vue-material-design-icons/Star.vue"
 import StarHalfIcon from "vue-material-design-icons/StarOutline.vue"
+import MenuIcon from "vue-material-design-icons/Menu.vue"
 import '../designs/styles.css'
 
     export default {
@@ -88,7 +99,8 @@ import '../designs/styles.css'
               MarkerIcon,
               DeleteIcon,
               StarIcon,
-              StarHalfIcon
+              StarHalfIcon,
+              MenuIcon,
          },
        
         data (){
@@ -195,55 +207,5 @@ import '../designs/styles.css'
 </script>
 
 <style scoped>
-
-.page-container {
-    width: 100%;
-    height:100%;
-    background-color: red;
-}
- .md-app {
-  height:100%;
-    border: 1px solid rgba(#000, .12);
-  }
-
-  .md-drawer {
-    width: 230px;
-    max-width: calc(100vw - 125px);
-  }
-    #notebook {
-        display: flex;
-        height: 100vh;
-        
-    }
-    .main{
-        width: 45%;
-    }
-
-    .preview{
-        width: 35%;
-        background: #f2f2f2;
-        height:70%;
-    }
-
-    .sidebar {
-        width: 20%;
-    }
-    textarea{
-        width: 100%;
-        height: 70%;
-    }
-    button{
-        margin-bottom:20px;
-    }
-    .note {
-        margin-top: 10px;
-        cursor: pointer;
-    }
-    .selected {
-        background-color: green;
-        color: white;
-        padding: 10px;
-        margin-right: 15px;
-    }
 
 </style>

@@ -1,17 +1,102 @@
-@import '~vue-material/dist/vue-material.css'
-/* #notebook {
+@import '~vue-material/dist/vue-material.css';
+.page-container {
+    width: 100%;
+    height:100%;
+    background-color: red;
+}
+ .md-app {
+  height:100%;
+    border: 1px solid rgba(#000, .12);
+  }
+
+  .md-drawer {
+    width: 230px;
+    max-width: calc(100vw - 125px);
+  }
+   
+.md-content {
+    display: flex !important;
+    height: 100%;
+}
+
+#notebook {
     display: flex;
     height: 100vh;
+    
 }
 .main{
-    width: 60%;
+    width: 50%;
+    height: 100%;
 }
 
 .preview{
-    width:40%;
+    width: 50%;
     background: #f2f2f2;
+    height:100%;
+}
 
+.sidebar {
+    width: 20%;
+}
+.md-textarea{
+    width: 100%;
+
+     
+}
+button{
+    margin-bottom:20px;
+    color: #fff;
+}
+.note {
+    margin-top: 10px;
+    cursor: pointer;
+}
+.selected {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    margin-right: 15px;
+}
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.md-icon.md-theme-default.md-icon-font  {
+    color: #fff !important;
+}
+/* input {
+    background-color: #fff;
+    margin-left: 30px;
+    box-shadow: none;
+    border: none;
+    height: 30px;
+    width: 350px;
+    padding:5px;
 } */
+
+.oneBtn{
+    background-color: #ff9100;
+    color: #fff;
+    border:none;
+    padding: 6px;
+    font-size:20px;
+    font-weight: 600;
+    margin-right:5px;
+}
+
+
+.twoBtn{
+    background-color: #e53935;
+    color: #fff;
+    border:none;
+    padding: 6px;
+    font-size:20px;
+    font-weight: 600;
+    margin-right:5px;
+}
 
 
  
