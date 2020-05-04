@@ -1,47 +1,99 @@
 <template>
-    <div id="notebook">
-        <!-- sidebar -->
-        <aside class="sidebar">
-            <button @click="addNote" 
-            :title="addNoteTitle">
-            Add Note</button>
-            <!-- note-list -->
+  <div class="page-container">
+    <md-app md-waterfall md-mode="reveal">
+      <md-app-toolbar class="md-primary">
+           <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+          <md-icon>menu</md-icon>
+        </md-button>
+        <span class="md-title">Junik Markdown NoteBook</span>
+      </md-app-toolbar>
+
+      <md-app-drawer  :md-active.sync="menuVisible">
+        <md-toolbar class="md-transparent" md-elevation="0">
+         <md-button class="md-dense md-raised  md-primary" 
+            @click="addNote" 
+            :title="addNoteTitle"><PlusIcon/>
+            Add Note</md-button>
+        </md-toolbar>
+
+        <md-list>
+          
+
+          <!-- note-list -->
             <div class="notes">            
               <div class="note" 
-              v-for="(note, index) of notes" 
+              v-for="(note, index) of sortedNotes" 
               :key="index"  @click="selectNote(note)" 
               :class="{selected: note === selectedNote}">
-              {{note.title}}</div>           
+              <div class="favorite-icon" v-if="note.favorite"><StarIcon/></div>
+              <md-list-item>
+            <MarkerIcon/>
+            <span class="md-list-item-text"> {{note.title}}</span>
+          </md-list-item>
+             </div>           
             </div>
-        </aside>
-        <!-- main pane -->
+        </md-list>
+      </md-app-drawer>
+
+      <md-app-content>
         <section class="main" v-if="selectedNote">
             <div  class="toolbar">
                 <!-- rename toolbar -->
                <input type="text" v-model="selectedNote.title" placeholder="new note title"> 
+               <!-- favorite icon -->
+               <button @click="favoriteNote" title="Favorite note">
+                   <span v-if="selectedNote.favorite">
+                   <StarIcon/></span>
+
+               <span v-if="!selectedNote.favorite"><StarHalfIcon/></span></button>
+                   <!-- {{selectedNote.favorite ? <StarIcon/> :'&'}} -->
                <!-- delete note -->
-               <button @click="removeNote">delete</button>
+               <button @click="removeNote"><DeleteIcon/></button>
             </div>
             <textarea v-model="selectedNote.content"></textarea>
+            <!-- footer of panel -->
+            <div class="toolbar status-bar">
+                <span class="date">
+                    <span class="label">Created </span>
+                    <span class="value">{{selectedNote.created | date }}</span>
+                </span>
+            </div>
         </section>
         <!-- preview pane -->
         <aside class="preview"
          v-if="selectedNote" 
          v-html="notePreview"></aside>
-    </div>
+      </md-app-content>
+    </md-app>
+  </div>
 </template>
+
+
 
 
 <script>
 import marked from "marked"
-// import styles from '../designs/styles.css'
+import  "../filter"
+import PlusIcon from "vue-material-design-icons/Plus.vue"
+import MarkerIcon from "vue-material-design-icons/Marker.vue"
+import DeleteIcon from "vue-material-design-icons/DeleteOutline.vue"
+import StarIcon from "vue-material-design-icons/Star.vue"
+import StarHalfIcon from "vue-material-design-icons/StarOutline.vue"
+import '../designs/styles.css'
 
     export default {
         name: 'note-book',
+         components: {
+              PlusIcon,
+              MarkerIcon,
+              DeleteIcon,
+              StarIcon,
+              StarHalfIcon
+         },
        
         data (){
             return{
-                
+                menuVisible: false,
             // content: localStorage.getItem('content') || 'You can write in **markdown**',
                
                 notes: JSON.parse(localStorage.getItem('notes')) || [
@@ -88,6 +140,11 @@ import marked from "marked"
             selectedNote () {
                 return this.notes.find(note =>note.id === this.selectedId)
             },
+            sortedNotes (){
+                return this.notes.slice()
+                    .sort((a,b) => a.created - b.created)
+                    .sort((a,b) => (a.favorite === b.favorite) ? 0 : a.favorite ? -1 : 1)
+            },
         },
         methods: {
             addNote(){
@@ -118,7 +175,10 @@ import marked from "marked"
                         this.notes.splice(index, 1)
                     }
                 }
-            }
+            },
+            favoriteNote (){
+                this.selectedNote.favorite = !this.selectedNote.favorite
+            },
         }, 
         watch: {
            notes: {
@@ -135,6 +195,21 @@ import marked from "marked"
 </script>
 
 <style scoped>
+
+.page-container {
+    width: 100%;
+    height:100%;
+    background-color: red;
+}
+ .md-app {
+  height:100%;
+    border: 1px solid rgba(#000, .12);
+  }
+
+  .md-drawer {
+    width: 230px;
+    max-width: calc(100vw - 125px);
+  }
     #notebook {
         display: flex;
         height: 100vh;
@@ -147,7 +222,7 @@ import marked from "marked"
     .preview{
         width: 35%;
         background: #f2f2f2;
-    
+        height:70%;
     }
 
     .sidebar {
@@ -155,7 +230,7 @@ import marked from "marked"
     }
     textarea{
         width: 100%;
-        height: 100%;
+        height: 70%;
     }
     button{
         margin-bottom:20px;
