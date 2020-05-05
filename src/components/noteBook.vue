@@ -62,11 +62,27 @@
             </md-field>
             <!-- <textarea v-model="selectedNote.content"></textarea> -->
             <!-- footer of panel -->
-            <div class="toolbar status-bar">
+            <div class="toolbar-bottom status-bar">
                 <span class="date">
                     <span class="label">Created </span>
                     <span class="value">{{selectedNote.created | date }}</span>
                 </span>
+                 <span class="lines">
+                    <span class="label">Lines</span>
+                    <span class="value">{{ linesCount }}</span>
+                </span>
+                <!-- <span class="words">
+                    <span class="label">Words </span>
+                    <span class="value">{{ wordsCount }}</span>
+                </span> -->
+                <span class="characters">
+                    <span class="label">Characters</span>
+                    <span class="value">{{ charactersCount }}</span>
+                </span>
+                <span class="previewB">
+                    <span class="preview-icon"><EyeIcon/></span>          
+                </span>
+               
             </div>
         </section>
         <!-- preview pane -->
@@ -90,6 +106,7 @@ import DeleteIcon from "vue-material-design-icons/DeleteOutline.vue"
 import StarIcon from "vue-material-design-icons/Star.vue"
 import StarHalfIcon from "vue-material-design-icons/StarOutline.vue"
 import MenuIcon from "vue-material-design-icons/Menu.vue"
+import EyeIcon from "vue-material-design-icons/Eye.vue"
 import '../designs/styles.css'
 
     export default {
@@ -101,6 +118,7 @@ import '../designs/styles.css'
               StarIcon,
               StarHalfIcon,
               MenuIcon,
+              EyeIcon,
          },
        
         data (){
@@ -157,6 +175,13 @@ import '../designs/styles.css'
                     .sort((a,b) => a.created - b.created)
                     .sort((a,b) => (a.favorite === b.favorite) ? 0 : a.favorite ? -1 : 1)
             },
+            linesCount () {
+                return this.selectedNote.content.split(/\r\n|\r|\n/).length
+            },
+            charactersCount() {
+                return this.selectedNote.content.split('').length;
+            }
+          
         },
         methods: {
             addNote(){
