@@ -6,6 +6,7 @@
           <md-icon><MenuIcon/></md-icon>
         </md-button>
         <span class="md-title">Junik Markdown NoteBook</span>
+        <span class="preview-icon-sm" @click="showPreview= !showPreview"><EyeIcon/></span>   
       </md-app-toolbar>
 
       <md-app-drawer  :md-active.sync="menuVisible">
@@ -25,10 +26,12 @@
               v-for="(note, index) of sortedNotes" 
               :key="index"  @click="selectNote(note)" 
               :class="{selected: note === selectedNote}">
-              <div class="favorite-icon" v-if="note.favorite"><StarIcon/></div>
+              
               <md-list-item>
-            <MarkerIcon/>
+                 <md-icon class="sidebar-icon"><MarkerIcon/> </md-icon>
             <span class="md-list-item-text"> {{note.title}}</span>
+            <div class="favorite-icon-sidebar"              v-if="note.favorite"><StarIcon/>
+            </div>
           </md-list-item>
              </div>           
             </div>
@@ -44,6 +47,11 @@
                     <md-input v-model="selectedNote.title"></md-input>
                 </md-field>
                <!-- <input type="text" v-model="selectedNote.title" placeholder="new note title">  -->
+               <!-- preview -->
+               <button  @click="showPreview= !showPreview" class="threeBtn">
+                   <span class="preview-icon"><EyeIcon/></span> 
+               </button>
+               
                <!-- favorite icon -->
                <button @click="favoriteNote" title="Favorite note"
                  class="oneBtn">
@@ -79,16 +87,14 @@
                     <span class="label">Characters</span>
                     <span class="value">{{ charactersCount }}</span>
                 </span>
-                <span class="previewB">
-                    <span class="preview-icon"><EyeIcon/></span>          
-                </span>
                
             </div>
         </section>
         <!-- preview pane -->
         <aside class="preview"
-         v-if="selectedNote" 
+         v-if="selectedNote" v-show="showPreview"
          v-html="notePreview"></aside>
+         
       </md-app-content>
     </md-app>
   </div>
@@ -124,6 +130,7 @@ import '../designs/styles.css'
         data (){
             return{
                 menuVisible: false,
+                showPreview: false,
             // content: localStorage.getItem('content') || 'You can write in **markdown**',
                
                 notes: JSON.parse(localStorage.getItem('notes')) || [
@@ -188,7 +195,7 @@ import '../designs/styles.css'
                 const time = Date.now()
                 const note = {
                     id: String(time),
-                    title: 'New note' + (this.notes.length + 1),
+                    title: 'New note' + (this.notes.length + 1) + '.md',
                     content: '**Hi** !',
                     created: time,
                     favorite: false,

@@ -29,13 +29,10 @@
 
 .preview{
     width: 50%;
-    background: #f2f2f2;
+    background: #eceff1;
     height:100%;
 }
 
-.sidebar {
-    width: 20%;
-}
 .md-field.md-has-textarea:not(.md-autogrow) .md-textarea {
     min-height:400px !important;
 }
@@ -47,10 +44,24 @@ button{
     margin-bottom:20px;
     color: #fff;
 }
-.note {
-    margin-top: 10px;
-    cursor: pointer;
+/* sidebar */
+.notes {
+    position: absolute;
 }
+.note {
+    cursor: pointer;
+    color: #333;
+}
+
+.favorite-icon-sidebar{
+    position: relative
+}
+
+.sidebar-icon{
+    color: #333;
+}
+
+/* ends here */
 .selected {
     background-color: green;
     color: white;
@@ -98,6 +109,15 @@ button{
     margin-right:5px;
 }
 
+.threeBtn{
+    background-color: #f48fb1;
+    color: #fff;
+    border:none;
+    padding: 6px;
+    font-size:20px;
+    font-weight: 600;
+    margin-right:5px;
+}
 .toolbar-bottom{
     position: absolute;
 }
@@ -125,10 +145,20 @@ button{
 .value{
     color: #e53935;
     font-weight: bold;
+    padding-left:3px;
 }
 
-.preview-icon{
+/* .preview-icon{
     display: none;    
+} */
+
+.md-title{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.preview-icon-sm {
+    display:none;
 }
 
  /* responsiveness */
@@ -139,11 +169,16 @@ button{
     }
     
     .preview{
-        width: 100%;
-        background: #f2f2f2;
-        height:100%;
-        display: none;
+        width: 90%;
+        background: #eceff1;
+        /* height:100%; */
+        /* display: none; */
+        position: absolute;
+        z-index:1;
+        padding: 8px;
     }
+
+    
     .lines{
         position: relative;
         bottom:50px;
@@ -168,9 +203,10 @@ button{
         font-weight: bold;
     }
     
-    .preview-icon{
+    .preview-icon-sm{
       display: inline;  
-      font-size: 12px;
+      font-size:20px;
+      margin-left: 15px;
     }
     .previewB {
         position: relative;
@@ -180,6 +216,9 @@ button{
     }
 
     .md-title{
-        font-size: 20px;
+        font-size: 15px;
+    }
+    .threeBtn {
+        display: none
     }
  }
