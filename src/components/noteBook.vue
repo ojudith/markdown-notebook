@@ -28,9 +28,16 @@
               :class="{selected: note === selectedNote}">
               
               <md-list-item>
-                 <md-icon class="sidebar-icon"><MarkerIcon/> </md-icon>
+                  <div class="maker-icon">
+                      <MarkerIcon/>
+                  </div>
+               
             <span class="md-list-item-text"> {{note.title}}</span>
-            <div class="favorite-icon-sidebar"              v-if="note.favorite"><StarIcon/>
+            <div class="favorite-icon-sidebar"              v-if="note.favorite">
+                <div id="fav-icon">
+                    <StarIcon/>
+                </div>
+                
             </div>
           </md-list-item>
              </div>           

@@ -45,6 +45,13 @@ button{
     color: #fff;
 }
 /* sidebar */
+.md-button-content{
+    font-size:16px !important;
+}
+
+.md-button-content{
+    padding: 0 18px !important; 
+}
 .notes {
     position: absolute;
 }
@@ -57,13 +64,23 @@ button{
     position: relative
 }
 
+.marker-icon {
+    color: #e53935;
+    margin-right: 8px;
+}
+
+#fav-icon{
+    color: #ff9100;
+    margin-left: 15px;
+}
+
 .sidebar-icon{
     color: #333;
 }
 
 /* ends here */
 .selected {
-    background-color: green;
+    background-color: #eceff1;
     color: white;
     padding: 10px;
     margin-right: 15px;
