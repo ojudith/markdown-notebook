@@ -30,7 +30,7 @@
 .preview{
     width: 50%;
     background: #eceff1;
-    height:95%;
+    height:88%;
     padding: 8px;
 }
 
@@ -184,9 +184,9 @@ button{
     }
     
     .preview{
-        width: 92%;
+        width: 80%;
         background: #eceff1;
-        height:80%;
+        height:88%;
         /* display: none; */
         position: absolute;
         z-index:1;
