@@ -6,7 +6,10 @@
           <md-icon><MenuIcon/></md-icon>
         </md-button>
         <span class="md-title">Junik Markdown NoteBook</span>
-        <span class="preview-icon-sm" @click="showPreview= !showPreview"><EyeIcon/></span>   
+            <span class="preview-icon-sm" @click="showPreview= !showPreview"> 
+                <span v-if="showPreview"><PencilIcon/></span>
+                <span v-else><EyeIcon/></span>
+            </span>   
       </md-app-toolbar>
 
       <md-app-drawer  :md-active.sync="menuVisible">
@@ -56,7 +59,8 @@
                <!-- <input type="text" v-model="selectedNote.title" placeholder="new note title">  -->
                <!-- preview -->
                <button  @click="showPreview= !showPreview" class="threeBtn">
-                   <span class="preview-icon"><EyeIcon/></span> 
+                   <span v-if="showPreview"><PencilIcon/></span>
+                 <span v-else><EyeIcon/></span>
                </button>
                
                <!-- favorite icon -->
@@ -120,6 +124,7 @@ import StarIcon from "vue-material-design-icons/Star.vue"
 import StarHalfIcon from "vue-material-design-icons/StarOutline.vue"
 import MenuIcon from "vue-material-design-icons/Menu.vue"
 import EyeIcon from "vue-material-design-icons/Eye.vue"
+import PencilIcon from "vue-material-design-icons/Pencil.vue"
 import '../designs/styles.css'
 
     export default {
@@ -132,6 +137,7 @@ import '../designs/styles.css'
               StarHalfIcon,
               MenuIcon,
               EyeIcon,
+              PencilIcon,
          },
        
         data (){

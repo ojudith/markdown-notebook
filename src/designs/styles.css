@@ -30,7 +30,8 @@
 .preview{
     width: 50%;
     background: #eceff1;
-    height:100%;
+    height:95%;
+    padding: 8px;
 }
 
 .md-field.md-has-textarea:not(.md-autogrow) .md-textarea {
@@ -137,26 +138,23 @@ button{
 }
 .toolbar-bottom{
     position: absolute;
+    
 }
-.date{
-    position: relative;
-    bottom:50px;
-    padding: 5px;
-}
+
 .lines{
-    position: relative;
     bottom:50px;
     padding: 5px;
+    padding-top: 10px;
 }
-.date{
-    position: relative;
+.date{ 
     bottom:50px;
     padding: 5px;
+    padding-top: 10px;
 }
 .characters{
-    position: relative;
     bottom:50px;
     padding: 5px;  
+    padding-top: 10px;
 }
 
 .value{
@@ -182,13 +180,13 @@ button{
  @media screen and (max-width:768px){
     .main{
         width: 100%;
-        height: 100%;
+        height: 80%;
     }
     
     .preview{
-        width: 90%;
+        width: 92%;
         background: #eceff1;
-        /* height:100%; */
+        height:80%;
         /* display: none; */
         position: absolute;
         z-index:1;
