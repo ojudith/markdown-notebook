@@ -6,4 +6,4 @@
 
 ##### Developed by Judith Oiku
 
-Demo (Notebook)[https://judymarkdown-notebook.netlify.app/]
+Demo [Notebook](https://judymarkdown-notebook.netlify.app/)
